@@ -1,4 +1,4 @@
-The benchmark.txt file provides detailed statistics for the 40,000,320 sampled tile sets used to evaluate software performance. Below is a description of each field in the file:
+The benchmark*.txt files provide detailed statistics for the 40,000,320 sampled tile sets used to evaluate software performance. Below is a description of each field in the file:
 
 SET1: The tile set assigned to the first player, which always includes the largest double tile.
 SET2: The tile set assigned to the second player.
