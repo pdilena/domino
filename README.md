@@ -36,8 +36,8 @@ MinRegretTT   0|1 0|2 2|2 3|3 0|4 2|4 5|6    ExpectiMaxTT   0|3 3|4 1|5 1|6 2|6 
 
 ## Repository Contents
 
-+ src/: The source code for the Domino strategies and match execution.
-+ data/: Experimental data used in the associated paper.
++ DominoGame/: The source code for the Domino strategies and match execution.
++ Data/: Experimental data used in the associated paper.
 + README.md: This documentation.
 + LICENSE: License information for the repository.
 
