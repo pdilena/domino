@@ -35,7 +35,7 @@ public class DominoGameTree {
                                 System.out.print(" " + score);
                         else
                                 System.out.print(" " + score + "X");
-                        B.print();
+                        //B.print();
                         return score;
                 } else if (B.getCurrentPlayer() == DominoPlayerId.FIRST) {
                         int score = Integer.MIN_VALUE;
