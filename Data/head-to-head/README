@@ -1,0 +1,3 @@
+These files provide the detailed results of head-to-head comparisons conducted using the 752,113 tile sets from the TileSets.4000+.txt file,
+located in the benchmark directory. Each player was tested both as the first player and the second player on the same set of tiles, competing
+against every other player. Each file documents the match results for a specific pair of players.
