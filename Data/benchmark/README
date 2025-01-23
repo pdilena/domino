@@ -14,5 +14,4 @@ WIN1: The number of possible matches won by Player 1 (i.e., leaves with a score 
 DRAW: The number of possible draws (i.e., leaves with a score = 0).
 WIN2: The number of possible matches won by Player 2 (i.e., leaves with a score < 0).
 
-For the head-to-head comparison tests, a set of tiles was selected where the game tree contains at least 4,000 leaves (i.e., #LEAVES >= 4000). These filtered
-tile sets are saved in the TileSets.4000+.txt file.
+For the head-to-head comparison tests, a set of tiles was selected where the game tree contains at least 4,000 leaves (i.e., #LEAVES >= 4000). These filtered tile sets are saved in the TileSets.4000+.txt file.
