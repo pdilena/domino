@@ -49,6 +49,7 @@ public class DominoBoard {
         private long endsHash[];
         private long turnHash[];
         private long sizeHash[][];
+        private long passHash;
 
         /**
          * Constructs a new domino board with the initial tile sets for both players.
@@ -267,7 +268,7 @@ public class DominoBoard {
                 Random rand = new Random(this.trueTiles[0].hashValue()+this.trueTiles[1].hashValue());
         
                 // Create hash arrays
-                int n = Math.max(this.trueTiles[0].getMaxValue(),this.trueTiles[0].getMaxValue());
+                int n = Math.max(this.trueTiles[0].getMaxValue(),this.trueTiles[1].getMaxValue());
                 this.endsHash  = new long[(n+1)*(n+2)/2];
                 this.turnHash  = new long[2];
                 this.sizeHash  = new long[2][Math.max(this.size[0],this.size[1])+1];
@@ -283,6 +284,8 @@ public class DominoBoard {
                 for(int i = 0; i < this.sizeHash.length; i++)
                         for (int j = 0; j < this.sizeHash[i].length; j++)
                                 this.sizeHash[i][j] = rand.nextLong();
+
+                this.passHash = rand.nextLong();
         }             
 
         /**                     
@@ -301,6 +304,9 @@ public class DominoBoard {
                 DominoTile ends = this.getBoardEnds();
                 if(!ends.isEmpty())
                         key ^= this.endsHash[ends.hashCode()];
+
+                if(this.wasLastTurnPass())
+                    key ^= this.passHash;
 
                 return key;
         }
