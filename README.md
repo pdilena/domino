@@ -1,6 +1,6 @@
 # Domino Block Computational Strategies
 This repository contains the source code and experimental data for the paper:
-"Domino Game Strategies Under Uncertainty: Risk-Averse, Risk-Seeking, Risk-Neutral, and Regret-Averse Approaches."
+"Decision strategies under uncertainty in Domino Block game"
 
 The repository enables users to explore various computational strategies for playing Domino, including Expectimax and Minregret. The provided code allows for simulating matches between different strategies on either randomly selected or predefined sets of tiles.
 
