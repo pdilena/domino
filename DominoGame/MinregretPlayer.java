@@ -111,7 +111,6 @@ public class MinregretPlayer implements DominoPlayer {
 
         private DominoTile minregretSelect(DominoTileSet myset, DominoTileSet opset, DominoTile endstile, int opsize) {
                 DominoTile          tile = new DominoTile();
-                double         bestscore = -Double.MAX_VALUE;
                 DominoBoard            C = new DominoBoard(myset,opset,endstile);
                 LinkedList<DominoTile> L = myset.matchingTiles(endstile);
                 Score[]                S = new Score[L.size()];
@@ -150,7 +149,6 @@ public class MinregretPlayer implements DominoPlayer {
 
         private DominoTile minregretttSelect(DominoTileSet myset, DominoTileSet opset, DominoTile endstile, int mysize, int opsize) {
                 DominoTile          tile = new DominoTile();
-                double         bestscore = -Double.MAX_VALUE;
                 DominoBoard            C = new DominoBoard(myset,opset,endstile,mysize,opsize);
                 LinkedList<DominoTile> L = myset.matchingTiles(endstile);
                 Score[]                S = new Score[L.size()];
@@ -283,7 +281,7 @@ public class MinregretPlayer implements DominoPlayer {
                         int k = 0;
                         for(DominoTile t: L) {
                                 C.playTile(t);
-                                S[k++] = minregret(C,size);
+                                S[k++] = minregrettt(C,size,T);
                                 C.unplayTile();
                         }
                         double minregret = Double.MAX_VALUE;
@@ -309,7 +307,7 @@ public class MinregretPlayer implements DominoPlayer {
                         for(DominoTileProb p: P) {
                                 if(p.tile.isEmpty() && P.size() > 1) L = C.trueTiles[id].removeMatches(C.getBoardEnds());
                                 C.playTile(p.tile);
-                                score.merge(minregret(C,(p.tile.isEmpty() ? size : size-1)),p.prob);
+                                score.merge(minregrettt(C,(p.tile.isEmpty() ? size : size-1),T),p.prob);
                                 C.unplayTile();
                                 if(p.tile.isEmpty()) C.trueTiles[id].add(L);
                                 currprob += p.prob;
