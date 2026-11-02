@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.HashMap;
+import java.security.SecureRandom;
 
 /**
  * Runs a game against two DominoPlayer classes and prints the game score.
@@ -32,9 +33,11 @@ public class DominoGame {
         private static DominoTileSet[] S = new DominoTileSet[2];
         private static DominoPlayer[]  P = new DominoPlayer[2];
         private static DominoBoardPlus B;
-        private static boolean         VERBOSE   = false;
-        private static boolean         SWAP      = false;
-        private static boolean         TOURNMENT = false;
+        private static boolean         VERBOSE     = false;
+        private static boolean         SWAP        = false;
+        private static boolean         TOURNMENT   = false;
+        private static long            RANDOM_SEED = new SecureRandom().nextLong();
+        private static Random          RANDOM      = new Random(RANDOM_SEED);
 
         private static int playDomino(DominoPlayer[] P, DominoBoardPlus B) {
                 while(B.getCurrentState() == DominoGameState.OPEN) {
@@ -59,6 +62,7 @@ public class DominoGame {
                 System.err.println("  -2 <Tile set> Set of tiles for the second player. Default: random");
                 System.err.println("  -s            Play again swapping first and second player. Default: " + SWAP);
                 System.err.println("  -t            Tournment mode. Play on random sets until one player reaches 100 points. Default: " + TOURNMENT);
+                System.err.println("  -r <long>     Random seed. Default: randomly generated");
                 System.err.println("  -v            Verbose mode. Default: " + VERBOSE);
         }
 
@@ -74,6 +78,8 @@ public class DominoGame {
         }
         
         private static void tournment(DominoPlayer[] P) {
+                System.out.println("# random_seed\t" + RANDOM_SEED);
+
                 DominoPlayer P0 = P[0], P1 = P[1];
                 DominoTileSet[] S;
                 HashMap<DominoPlayer,Integer> H = new HashMap<DominoPlayer,Integer>();
@@ -158,15 +164,14 @@ public class DominoGame {
 
         private static ArrayList<DominoTile> drawTiles(int M, int N, ArrayList<DominoTile> A) {
                 ArrayList<DominoTile> L = new ArrayList<>();
-                Random rand = new Random();
 
                 if(A != null && !containsDouble(A)) {
-                        int i = rand.nextInt(M + 1);
+                        int i = RANDOM.nextInt(M + 1);
                         L.add(new DominoTile(i,i));
                 }
 
                 while(L.size() != N) {
-                        DominoTile tile = new DominoTile(rand.nextInt(M+1),rand.nextInt(M+1));
+                        DominoTile tile = new DominoTile(RANDOM.nextInt(M+1),RANDOM.nextInt(M+1));
                         if((A == null || !A.contains(tile)) && !L.contains(tile))
                                 L.add(tile);
                 }
@@ -216,6 +221,12 @@ public class DominoGame {
                                                 break;
                                         case 't':
                                                 TOURNMENT = true;
+                                                break;
+                                        case 'r':
+                                                if(++i >= A.length)
+                                                    throw new IllegalArgumentException("Expected parameter after -r");
+                                                RANDOM_SEED = Long.parseLong(A[i]);
+                                                RANDOM = new Random(RANDOM_SEED);
                                                 break;
                                         case 'v':
                                                 VERBOSE = true;
